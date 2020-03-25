@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.lsj.movie.dao.MovieMapper">
+  <select id="selects" resultType="Movie">
+  	select * from movie
+  </select>
+  
+  
+   <select id="select" resultType="Movie">
+  	select * from movie
+  	<where>
+  		<if test="author!=null and author!=''">
+  			and author like concat('%',#{author},'%')
+  		</if>
+  		<if test="name!=null and name!=''">
+  			and name like concat('%',#{name},'%')
+  		</if>
+  	</where>
+  </select>
+  
+  
+  <delete id="del">
+  	delete  from movie where id in
+  	<foreach collection="ids">
+  		#{ids}
+  	</foreach> 
+  </delete>
+  </mapper>
